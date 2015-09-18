@@ -1,6 +1,6 @@
 # lispylists.js
 
-this is a start to make some useful data structures in javascript that are 
+this is a start to make some data structures in javascript that are 
 useful and dynamic.
 
 right now it has the following:
