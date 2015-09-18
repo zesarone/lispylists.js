@@ -19,22 +19,24 @@ var list = function (arr) {
                 return '( ' + p.head() + ' , ' + p.rest() + ' )';
             }
             p.map = function (fn) {
-                if (nil.equal(p.rest()))
-                    return fn(p.head());
-                else
-                    return pair(fn(p.head()), p.rest().map(fn));
+                return p.merge(fn, pair);
             };
+            p.fold = function (fn) {
+                return p.merge(function (e) {
+                    return e;
+                }, fn);
+            }
             p.forEach = function (fn) {
                 if (!nil.equal(p)) {
                     fn(p.head());
                     p.rest().forEach(fn);
                 }
             };
-            p.merge = function (modifier, append){
+            p.merge = function (modifier, append) {
                 if (nil.equal(p.rest()))
                     return modifier(p.head());
                 else
-                    return append( modifier( p.head() ), p.rest().merge( modifier, append));
+                    return append(modifier(p.head()), p.rest().merge(modifier, append));
             };
             p.reverse = function () {
                 if (nil.equal(p))
@@ -54,13 +56,13 @@ var list = function (arr) {
         return this === a;
     };
 
-    var worker = function (arr, i) {
+    var listBuilder = function (arr, i) {
         if (i + 1 === arr.length)
             return pair(arr[i], nil);
         else
-            return pair(arr[i], worker(arr, i + 1));
+            return pair(arr[i], listBuilder(arr, i + 1));
     };
-    return pair(arr[0], worker(arr, 1));
+    return pair(arr[0], listBuilder(arr, 1));
 };
 
 

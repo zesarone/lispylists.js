@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Test</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="text/javascript" src="lispylist.js"></script>
@@ -14,32 +14,35 @@ and open the template in the editor.
             // 
             // Usage examples...
             // 
+            function init() {
+                var nr = list(['ett', 'två', 'tre', 'fyra']);
+                var apanr = nr.map(function (e) {
+                    return 'apa nr: ' + e;
+                });
+                var bananr = '';
+                nr.forEach(function (e) {
+                    bananr += e + ' ';
+                });
 
-            var nr = list(['ett', 'två', 'tre', 'fyra']);
-            var apanr = nr.map(function (e) {
-                return 'apa nr: ' + e;
-            });
-            var bananr = '';
-            nr.forEach(function (e) {
-                bananr += e + ' ';
-            });
+                l1 = list(["en", "listen", "övning", "på", "closures", "!"]);
 
-            l1 = list(["en", "listen", "övning", "på", "closures", "!"]);
-
-            document.getElementsByTagName('body')[0].innerHTML =
-                    nr + '<br/>' +
-                    nr.merge(function (e) {
-                        return 'test' + e
-                    }, function (head, rest) {
-                        return head + ', ' + rest
-                    }) + '<br/>' +
-                    nr.reverse() + '<br/>' +
-                    apanr + '<br/>' +
-                    bananr + '<br/>lista: ' + l1;
-
+                document.getElementsByTagName('body')[0].innerHTML =
+                        nr + '<br/>' +
+                        nr.merge(function (e) {
+                            return 'test' + e
+                        }, function (head, rest) {
+                            return head + ', ' + rest;
+                        }) + '<br/>' +
+                        nr.fold(function (a, b) {
+                            return a + ':' + b;
+                        }) + '<br/>' +
+                        nr.reverse() + '<br/>' +
+                        apanr + '<br/>' +
+                        bananr + '<br/>lista: ' + l1;
+            }
         </script>
     </head>
-    <body>
+    <body onload="init();">
 
     </body>
 </html>
