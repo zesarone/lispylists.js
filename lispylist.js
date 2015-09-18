@@ -63,61 +63,6 @@ var list = function (arr) {
     return pair(arr[0], worker(arr, 1));
 };
 
-//var string = function (o) {
-//    var builder = function (s) {
-//        if (s.length === 0)
-//            return '';
-//        else
-//            return pair(s.charAt(0), builder(s.substring(1, s.length)));
-//    }
-//    var str = function (s) {
-//        function v() {
-//            return s;
-//        }
-//        v.toString = function () {
-//            var t ='';
-//            v().forEach(function(e){t += e+'';});
-//            console.log(t);
-//            return t;
-////            return v().toString();
-//        };
-//        return v;
-//    };
-//    return str(builder(o));
-//
-//}
-//
-//var asta = string("hejsan hejsan hejsan");
-//console.log(asta);
-
-var reader = function (s, breakChars, i) {
-
-}
-
-var parseList = function (s, i) {
-//	if(s.charAt(i) === '(')
-//        pair(
-}
-
-var nr = list(['ett', 'två', 'tre', 'fyra']);
-var apanr = nr.map(function (e) {
-    return 'apa nr: ' + e;
-});
-var bananr = '';
-nr.forEach(function (e) {
-    bananr += e + ' ';
-});
-
-l1 = list(["en", "listen", "övning", "på", "closures", "!"]);
-
-document.getElementsByTagName('body')[0].innerHTML =
-        nr + '<br/>' +
-        nr.merge(function(e){return 'test'+e},function(head,rest){return head + ', ' + rest}) + '<br/>' +
-        nr.reverse() + '<br/>' +
-        apanr + '<br/>' +
-        bananr + '<br/>lista: ' + l1;
-
-
 
 
 

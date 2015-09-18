@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="lispylist.js"></script>
+        <script type="text/javascript">
+            // 
+            // Usage examples...
+            // 
+
+            var nr = list(['ett', 'två', 'tre', 'fyra']);
+            var apanr = nr.map(function (e) {
+                return 'apa nr: ' + e;
+            });
+            var bananr = '';
+            nr.forEach(function (e) {
+                bananr += e + ' ';
+            });
+
+            l1 = list(["en", "listen", "övning", "på", "closures", "!"]);
+
+            document.getElementsByTagName('body')[0].innerHTML =
+                    nr + '<br/>' +
+                    nr.merge(function (e) {
+                        return 'test' + e
+                    }, function (head, rest) {
+                        return head + ', ' + rest
+                    }) + '<br/>' +
+                    nr.reverse() + '<br/>' +
+                    apanr + '<br/>' +
+                    bananr + '<br/>lista: ' + l1;
+
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>
