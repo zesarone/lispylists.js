@@ -19,32 +19,35 @@ var pair = function (a, b) {
     var cons = function (a, b) {
         var p = function (p) {
             return p ? a : b;
-        };
+        };        
         p.head = function () {
             return this(true);
         };
         p.rest = function () {
             return this(false);
         };
+        p.equal = function (a) {
+            return this === a;
+        };
         p.toString = function () {
             return '( ' + p.head() + ' , ' + p.rest() + ' )';
         };
         p.len = function () {
-            if(p === nil)
+            if(nil.equal(p))
                 return 0;
             else
-                return p.rest() === nil ? 1 : 1 + p.rest().len();
+                return nil.equal(p.rest()) ? 1 : 1 + p.rest().len();
         };
         p.get = function (i) {
             if(i <= 0){
                 return p.head();
-            }else if(p.rest() === nil){
+            }else if(nil.equal(p.rest())){
                 return nil;
             }else
                 return p.rest().get(i - 1);
         };
         p.append = function(l) {
-            if(p.rest() === nil)
+            if(nil.equal(p.rest()))
                 return pair(p.head(),l);
             else
                 return pair(p.head(),p.rest().append(l));                
@@ -87,7 +90,7 @@ var pair = function (a, b) {
                     left = pair(l.head(),left);
                 else
                     right = pair(l.head(),right);    
-                if(l.rest() !== nil) 
+                if(!nil.equal(l.rest())) 
                     partion(l.rest()); 
             };            
             if(p.len() > 1){
@@ -106,9 +109,7 @@ var nil = pair(null, null);
 nil.toString = function () {
     return 'nil';
 };
-nil.equal = function (a) {
-    return this === a;
-};
+
 
 
 
