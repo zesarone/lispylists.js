@@ -30,7 +30,10 @@ var pair = function (a, b) {
             return '( ' + p.head() + ' , ' + p.rest() + ' )';
         };
         p.len = function () {
-            return p.rest() === nil ? 1 : 1 + p.rest().len();
+            if(p === nil)
+                return 0;
+            else
+                return p.rest() === nil ? 1 : 1 + p.rest().len();
         };
         p.get = function (i) {
             if(i <= 0){
@@ -40,6 +43,12 @@ var pair = function (a, b) {
             }else
                 return p.rest().get(i - 1);
         };
+        p.append = function(l) {
+            if(p.rest() === nil)
+                return pair(p.head(),l);
+            else
+                return pair(p.head(),p.rest().append(l));                
+        }
         p.map = function (fn) {
             return p.merge(fn, pair);
         };
@@ -65,6 +74,28 @@ var pair = function (a, b) {
                 return p;
             else
                 return pair(p.rest().reverse(), p.head());
+        };
+        p.normalize = function(){
+            //todo
+        };
+        p.sort = function(cmp){ //quick-sort
+            var pivot = p.head();            
+            var left=nil,right=nil;
+            cmp = cmp === undefined ? function(a,b){return a < b;}: cmp;       
+            var partion = function(l){
+                if(cmp(l.head(), pivot))
+                    left = pair(l.head(),left);
+                else
+                    right = pair(l.head(),right);    
+                if(l.rest() !== nil) 
+                    partion(l.rest()); 
+            };            
+            if(p.len() > 1){
+                partion(p.rest());    
+                return left.sort().append(pair(pivot,nil)).append(right.sort());                        
+            }else{
+                return p;
+            }
         };
         return p;
     };
