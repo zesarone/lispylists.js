@@ -2,9 +2,8 @@
 
 var list = function (arr) {
     /*
-     * a Lisp aproach to a list implementation for javascript
+     * a Lisp aproach to a list implementation in javascript
      */
-
     var listBuilder = function (arr, i) {
         if (i + 1 === arr.length)
             return pair(arr[i], nil);
@@ -47,6 +46,8 @@ var pair = function (a, b) {
                 return p.rest().get(i - 1);
         };
         p.append = function(l) {
+            if(nil.equal(p))
+                return l;            
             if(nil.equal(p.rest()))
                 return pair(p.head(),l);
             else
@@ -66,17 +67,19 @@ var pair = function (a, b) {
                 p.rest().forEach(fn);
             }
         };
-        p.merge = function (modifier, append) {
-            if (nil.equal(p.rest()))
-                return modifier(p.head());
+        p.merge = function (modifierFn, concatFn) {
+            if(nil.equal(p))
+                return nil;
+            else if (nil.equal(p.rest()))
+                return modifierFn(p.head());
             else
-                return append(modifier(p.head()), p.rest().merge(modifier, append));
+                return concatFn(modifierFn(p.head()), p.rest().merge(modifierFn, concatFn));
         };
-        p.reverse = function () {
-            if (nil.equal(p))
+        p.reverse = function () {            
+            if (nil.equal(p.rest()))
                 return p;
             else
-                return pair(p.rest().reverse(), p.head());
+                return p.rest().reverse().append( list([p.head()]) );
         };
         p.normalize = function(){
             //todo
@@ -84,7 +87,7 @@ var pair = function (a, b) {
         p.sort = function(cmp){ //quick-sort
             var pivot = p.head();            
             var left=nil,right=nil;
-            cmp = cmp === undefined ? function(a,b){return a < b;}: cmp;       
+            cmp = cmp === undefined ? function(a,b){return a < b;}: cmp; //defaults to numerical less then 
             var partion = function(l){
                 if(cmp(l.head(), pivot))
                     left = pair(l.head(),left);
@@ -93,7 +96,7 @@ var pair = function (a, b) {
                 if(!nil.equal(l.rest())) 
                     partion(l.rest()); 
             };            
-            if(p.len() > 1){
+            if(!nil.equal(p) && !nil.equal(p.rest())){
                 partion(p.rest());    
                 return left.sort().append(pair(pivot,nil)).append(right.sort());                        
             }else{

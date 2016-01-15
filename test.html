@@ -23,32 +23,15 @@ and open the template in the editor.
                 nr.forEach(function (e) {
                     bananr += e + ' ';
                 });
-
-                l1 = list(["en", "listen", "övning", "på", "closures", "!"]);
-                var l2 = list([213, 342, 654, 543, 213, 321, 54365, 564, 3221, 45, 7, 8, 53, 6542, 24, 8, 523, 543, 984]);
-
+                var txt = "! closures på övning liten en"
+                l1 = list(txt.split(" "));
+                                
+                var l2 = list([213, 342, 654, 543, 213, 321, 54365, 564, 3221, 45, 7, 8, 53, 6542, 24, 8, 523, 543, 984]);              
                 
-                l2.sort().merge(
-                function(x){return x;},
-                function(a,b){return a + ', ' + b;}
-            )
                 document.getElementsByTagName('body')[0].innerHTML =
-                        nr + '<br/>' +
-                        nr.merge(function (e) {
-                            return 'test' + e
-                        }, function (head, rest) {
-                            return head + ', ' + rest;
-                        }) + '<br/>' +
-                        nr.fold(function (a, b) {
-                            return a + ':' + b;
-                        }) + '<br/>' +
-                        nr.reverse() + '<br/>' +
-                        apanr + '<br/>' +
-                        bananr + '<br/>lista: ' + l1 + '<br/>'
-                        l2.sort().merge(
-                            function(x){return x;},
-                            function(a,b){return a + ', ' + b;}
-                        );
+                       l1.reverse().fold(function(a,b){ return a+ ' ' +b;} ) + '<br/>' +
+                       //l2.toString() + '<br/>' +
+                       l2.sort(function(a,b){return a > b;}).fold(function(a,b){ return a+ ', ' +b;} );
             }
         </script>
     </head>
