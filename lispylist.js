@@ -73,7 +73,9 @@ var pair = function (a, b) {
             p.rest().reverse().append(list([p.head()]))
 
     p.flatten = () => {
-        if (p.head())
+        // if (p.head()) {
+        //     //todo
+        // }
     }
     p.sort = (cmp) => { //quick-sort
         let pivot = p.head();
