@@ -51,8 +51,8 @@ var pair = function (a, b) {
 
     p.forEach = (fn) => {
         if (!p.isNil()) {
-            fn(p.head());
-            p.rest().forEach(fn);
+            fn(p.head())
+            p.rest().forEach(fn)
         }
     };
 
@@ -83,9 +83,9 @@ var pair = function (a, b) {
         cmp = !cmp ? (a, b) => a < b : cmp //defaults to numerical less then 
         let partion = (l) => {
             if (cmp(l.head(), pivot))
-                left = pair(l.head(), left);
+                left = pair(l.head(), left)
             else
-                right = pair(l.head(), right);
+                right = pair(l.head(), right)
             if (!l.rest().isNil())
                 partion(l.rest())
         }

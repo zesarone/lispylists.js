@@ -1,0 +1,11 @@
+{
+  "name": "lispylist.js",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "babel src -d lib"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.0.0",
+    "babel-preset-babili": "0.0.12"
+  }
+}
